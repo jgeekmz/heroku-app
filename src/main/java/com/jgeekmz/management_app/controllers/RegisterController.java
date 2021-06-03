@@ -1,9 +1,12 @@
 package com.jgeekmz.management_app.controllers;
 
+import com.jgeekmz.management_app.configurations.MailGunConfig;
 import com.jgeekmz.management_app.models.User;
 import com.jgeekmz.management_app.repositories.RoleRepository;
 import com.jgeekmz.management_app.services.NotificationService;
 import com.jgeekmz.management_app.services.UserService;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
 import org.slf4j.Logger;
@@ -55,7 +58,7 @@ public class RegisterController {
 
     /** Processing the registration Form from user view */
     @RequestMapping(value = "/registerPage", method = RequestMethod.POST)
-    public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpServletRequest request) {
+    public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpServletRequest request) throws UnirestException {
 
         String email = user.getEmail();
         String name = user.getUsername();
@@ -110,6 +113,9 @@ public class RegisterController {
             registrationEmail.setFrom("noreply@domain.com");
 
             notificationService.sendEmail(registrationEmail);
+
+            JsonNode jsonNode = MailGunConfig.sendSimpleMessage();
+            System.out.println(jsonNode.toString());
 
             // redirect to register view with confirmation message
             modelAndView.addObject("confirmationMessage", "A confirmation e-mail has been sent to " + user.getEmail());
