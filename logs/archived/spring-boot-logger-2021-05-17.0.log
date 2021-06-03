@@ -1,0 +1,39 @@
+2021-05-17 00:29:58,775 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.2.0.Final
+2021-05-17 00:29:58,775 INFO org.springframework.boot.StartupInfoLogger [main] Starting ManagementAppApplication using Java 14.0.2 on Marto with PID 8664 (D:\Downloads\management_app\target\classes started by martin in D:\Downloads\management_app)
+2021-05-17 00:29:58,780 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.5.0-SNAPSHOT, Spring v5.3.7
+2021-05-17 00:29:58,780 INFO org.springframework.boot.SpringApplication [main] The following profiles are active: production
+2021-05-17 00:29:59,681 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-05-17 00:29:59,814 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 126 ms. Found 22 JPA repository interfaces.
+2021-05-17 00:30:00,870 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-05-17 00:30:00,884 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-17 00:30:00,885 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-05-17 00:30:00,885 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-17 00:30:01,135 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-05-17 00:30:01,142 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-05-17 00:30:01,143 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2257 ms
+2021-05-17 00:30:01,335 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-05-17 00:30:01,421 INFO org.hibernate.Version [main] HHH000412: Hibernate Core {5.4.6.Final}
+2021-05-17 00:30:01,592 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-05-17 00:30:01,712 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-05-17 00:30:02,109 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-05-17 00:30:02,125 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-05-17 00:30:03,745 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-05-17 00:30:03,751 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-05-17 00:30:04,305 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-17 00:30:05,251 INFO com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Spring Security 2020!!!!!
+2021-05-17 00:30:05,251 DEBUG com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Received a request
+2021-05-17 00:30:05,259 DEBUG com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Received a request >>> persistentTokenRepository
+2021-05-17 00:30:05,296 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5b476930, org.springframework.security.web.context.SecurityContextPersistenceFilter@279e4506, org.springframework.security.web.header.HeaderWriterFilter@5a35efac, org.springframework.security.web.authentication.logout.LogoutFilter@4b02dc4e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3fe7c87c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@523e019c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57f83dc7, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@5bbb351e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18f1260, org.springframework.security.web.session.SessionManagementFilter@58e9e852, org.springframework.security.web.access.ExceptionTranslationFilter@2a10407e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@318ca53a]
+2021-05-17 00:30:05,506 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page template: index
+2021-05-17 00:30:05,644 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-05-17 00:30:05,674 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-17 00:30:05,684 INFO org.springframework.boot.StartupInfoLogger [main] Started ManagementAppApplication in 7.428 seconds (JVM running for 8.141)
+2021-05-17 00:30:05,686 INFO org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state LivenessState changed to CORRECT
+2021-05-17 00:30:05,688 INFO org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2021-05-17 00:30:11,672 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-17 00:30:11,672 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2021-05-17 00:30:11,674 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2021-05-17 00:30:11,898 WARN org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [166] milliseconds.
+2021-05-17 00:30:24,848 INFO com.jgeekmz.management_app.security.MySimpleUrlAuthenticationSuccessHandler [http-nio-8080-exec-8] Granted Authority >>>>>   ROLE_ADMIN
+2021-05-17 00:30:24,849 INFO com.jgeekmz.management_app.security.LoggedUser [http-nio-8080-exec-8] User was logged![jgeek]
+2021-05-17 00:30:25,003 DEBUG com.jgeekmz.management_app.main.controller.ApplicationController [http-nio-8080-exec-7] HEREEEEEEEEE

@@ -1,0 +1,74 @@
+2021-06-02 16:27:52,809 INFO org.springframework.boot.StartupInfoLogger [main] Starting ManagementAppApplication using Java 11.0.10 on LP145 with PID 16420 (C:\Users\zlatkov\IdeaProjects\management_app_heroku-main\target\classes started by zlatkov in C:\Users\zlatkov\IdeaProjects\management_app_heroku-main)
+2021-06-02 16:27:52,809 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.5.0-SNAPSHOT, Spring v5.3.7
+2021-06-02 16:27:52,809 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-06-02 16:27:54,229 DEBUG org.springframework.boot.web.servlet.server.DocumentRoot [main] Code archive: C:\Users\zlatkov\.m2\repository\org\springframework\boot\spring-boot\2.5.0-SNAPSHOT\spring-boot-2.5.0-20210520.224402-561.jar
+2021-06-02 16:27:54,229 DEBUG org.springframework.boot.web.servlet.server.DocumentRoot [main] Code archive: C:\Users\zlatkov\.m2\repository\org\springframework\boot\spring-boot\2.5.0-SNAPSHOT\spring-boot-2.5.0-20210520.224402-561.jar
+2021-06-02 16:27:54,229 DEBUG org.springframework.boot.web.servlet.server.DocumentRoot [main] None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2021-06-02 16:27:57,133 INFO com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Spring Security 2021!
+2021-06-02 16:27:57,133 DEBUG com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Received a request
+2021-06-02 16:27:57,148 DEBUG com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Received a request >>> persistentTokenRepository
+2021-06-02 16:27:57,202 ERROR org.springframework.boot.SpringApplication [main] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springSecurityFilterChain' defined in class path resource [org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.IllegalStateException: permitAll only works with HttpSecurity.authorizeRequests()
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:486)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:438)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:337)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1336)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1325)
+	at com.jgeekmz.management_app.ManagementAppApplication.main(ManagementAppApplication.java:32)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.IllegalStateException: permitAll only works with HttpSecurity.authorizeRequests()
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 21 common frames omitted
+Caused by: java.lang.IllegalStateException: permitAll only works with HttpSecurity.authorizeRequests()
+	at org.springframework.util.Assert.state(Assert.java:76)
+	at org.springframework.security.config.annotation.web.configurers.PermitAllSupport.permitAll(PermitAllSupport.java:51)
+	at org.springframework.security.config.annotation.web.configurers.PermitAllSupport.permitAll(PermitAllSupport.java:41)
+	at org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer.updateAccessDefaults(AbstractAuthenticationFilterConfigurer.java:392)
+	at org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer.init(AbstractAuthenticationFilterConfigurer.java:232)
+	at org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer.init(FormLoginConfigurer.java:231)
+	at org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer.init(FormLoginConfigurer.java:71)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.init(AbstractConfiguredSecurityBuilder.java:338)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.doBuild(AbstractConfiguredSecurityBuilder.java:300)
+	at org.springframework.security.config.annotation.AbstractSecurityBuilder.build(AbstractSecurityBuilder.java:38)
+	at org.springframework.security.config.annotation.web.builders.WebSecurity.performBuild(WebSecurity.java:285)
+	at org.springframework.security.config.annotation.web.builders.WebSecurity.performBuild(WebSecurity.java:83)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.doBuild(AbstractConfiguredSecurityBuilder.java:305)
+	at org.springframework.security.config.annotation.AbstractSecurityBuilder.build(AbstractSecurityBuilder.java:38)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.springSecurityFilterChain(WebSecurityConfiguration.java:127)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 22 common frames omitted
+2021-06-02 16:29:17,420 INFO org.springframework.boot.StartupInfoLogger [main] Starting ManagementAppApplication using Java 11.0.10 on LP145 with PID 2616 (C:\Users\zlatkov\IdeaProjects\management_app_heroku-main\target\classes started by zlatkov in C:\Users\zlatkov\IdeaProjects\management_app_heroku-main)
+2021-06-02 16:29:17,420 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.5.0-SNAPSHOT, Spring v5.3.7
+2021-06-02 16:29:17,420 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-06-02 16:29:18,844 DEBUG org.springframework.boot.web.servlet.server.DocumentRoot [main] Code archive: C:\Users\zlatkov\.m2\repository\org\springframework\boot\spring-boot\2.5.0-SNAPSHOT\spring-boot-2.5.0-20210520.224402-561.jar
+2021-06-02 16:29:18,844 DEBUG org.springframework.boot.web.servlet.server.DocumentRoot [main] Code archive: C:\Users\zlatkov\.m2\repository\org\springframework\boot\spring-boot\2.5.0-SNAPSHOT\spring-boot-2.5.0-20210520.224402-561.jar
+2021-06-02 16:29:18,844 DEBUG org.springframework.boot.web.servlet.server.DocumentRoot [main] None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2021-06-02 16:29:21,616 INFO com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Spring Security 2021!
+2021-06-02 16:29:21,616 DEBUG com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Received a request
+2021-06-02 16:29:21,632 DEBUG com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Received a request >>> persistentTokenRepository
+2021-06-02 16:29:22,433 INFO org.springframework.boot.StartupInfoLogger [main] Started ManagementAppApplication in 5.469 seconds (JVM running for 7.095)
+2021-06-02 16:29:22,585 DEBUG com.jgeekmz.management_app.ManagementAppApplication [main] Application was started not properly!
+2021-06-02 16:29:53,966 INFO com.jgeekmz.management_app.security.MySimpleUrlAuthenticationSuccessHandler [https-jsse-nio-8443-exec-4] Granted Authority >>>>>   ROLE_ADMIN
+2021-06-02 16:29:53,966 INFO com.jgeekmz.management_app.security.MySimpleUrlAuthenticationSuccessHandler [https-jsse-nio-8443-exec-4] Granted Authority >>>>>   ROLE_USER
+2021-06-02 16:29:54,212 INFO com.jgeekmz.management_app.security.LoggedUser [https-jsse-nio-8443-exec-4] User was logged![jgeek]
+2021-06-02 16:29:54,254 DEBUG com.jgeekmz.management_app.main.controller.ApplicationController [https-jsse-nio-8443-exec-1] HEREEEEEEEEE
