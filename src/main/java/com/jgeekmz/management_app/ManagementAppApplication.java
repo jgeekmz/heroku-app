@@ -25,8 +25,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class ManagementAppApplication {
 
 	//HTTP Port: 8080
-	@Value("${http.port}")
-	private int httpPort;
+	//@Value("${http.port}")
+	//private int httpPort;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ManagementAppApplication.class, args);

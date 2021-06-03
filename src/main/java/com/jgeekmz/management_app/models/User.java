@@ -167,7 +167,7 @@ public class User {
         return enabled;
     }
 
-    public void setEnabled() {
+    public void setEnabled(boolean b) {
         this.enabled = enabled;
     }
 
