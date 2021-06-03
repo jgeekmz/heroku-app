@@ -105,23 +105,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         log.info("Spring Security 2021!");
-        log.debug("Received a request");
 
         http
-                .requiresChannel().antMatchers("/registerPage", "/registerPageAdmin", "/login", "/confirm", "/confirmAdmin", "/resetPassword", "/reset_password", "/assets/**", "/css/**", "/js/**", "/fonts/**", "/img/**")
-                .requiresSecure()
-        .and()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/registerPage", "/registerPageAdmin", "/login", "/confirm", "/confirmAdmin", "/resetPassword", "/reset_password", "/assets/**", "/css/**", "/js/**", "/fonts/**", "/img/**").permitAll()
+                .antMatchers("/users/**", "/users", "/resources/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/activations").hasAuthority("ROLE_ADMIN")
+                .anyRequest()
+                .authenticated()
 
-//        https
-                     .csrf().disable()
-                    .authorizeRequests()
-//                    .antMatchers("/registerPage", "/registerPageAdmin", "/login", "/confirm", "/confirmAdmin", "/resetPassword", "/reset_password", "/assets/**", "/css/**", "/js/**", "/fonts/**", "/img/**")
-//                    .antMatchers("/users/**", "/users", "/resources/**").hasAuthority("ROLE_ADMIN")
-//                    //.antMatchers("/activations").hasAuthority("ROLE_ADMIN")
-//                    .anyRequest()
-//                    .authenticated()
-.and()
-
+                .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
                     .defaultSuccessUrl("/index", true)
@@ -131,7 +125,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
 
                 .and()
-                    .rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository())
+                .rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository())
 
                 .and()
                 .logout()
