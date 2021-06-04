@@ -27,13 +27,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @PropertySource("classpath:application.properties")
 public class ManagementAppApplication {
 
-	@Autowired
-	private UserRepository userRepository;
-
-	public ManagementAppApplication(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
-
 	//HTTP Port: 8080
 	//@Value("${http.port}")
 	//private int httpPort;
@@ -58,10 +51,6 @@ public class ManagementAppApplication {
 
 		log.debug("Application was started not properly!");
 	}
-
-
-
-
 
 //	// Additional Connector to enable support for Https and Http
 //	@Bean

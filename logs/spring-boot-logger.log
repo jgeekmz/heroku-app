@@ -504,3 +504,10 @@ org.springframework.expression.spel.SpelEvaluationException: EL1004E: Method cal
 2021-06-03 13:34:30,841 INFO com.jgeekmz.management_app.security.MySimpleUrlAuthenticationSuccessHandler [https-jsse-nio-8443-exec-4] Granted Authority >>>>>   ROLE_USER
 2021-06-03 13:34:31,064 INFO com.jgeekmz.management_app.security.LoggedUser [https-jsse-nio-8443-exec-4] User was logged![jgeek]
 2021-06-03 13:34:31,072 DEBUG com.jgeekmz.management_app.main.controller.ApplicationController [https-jsse-nio-8443-exec-8] HEREEEEEEEEE
+2021-06-04 09:02:52,519 INFO org.springframework.boot.StartupInfoLogger [main] Starting ManagementAppApplication using Java 11.0.10 on LP145 with PID 6104 (C:\Users\zlatkov\IdeaProjects\management_app_heroku-main\target\classes started by zlatkov in C:\Users\zlatkov\IdeaProjects\management_app_heroku-main)
+2021-06-04 09:02:52,521 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.5.0-SNAPSHOT, Spring v5.3.7
+2021-06-04 09:02:52,521 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-06-04 09:02:55,868 INFO com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Spring Security 2021!
+2021-06-04 09:02:55,878 DEBUG com.jgeekmz.management_app.configurations.ApplicationSecurityConfig [main] Received a request >>> persistentTokenRepository
+2021-06-04 09:02:56,224 INFO org.springframework.boot.StartupInfoLogger [main] Started ManagementAppApplication in 4.197 seconds (JVM running for 5.156)
+2021-06-04 09:02:56,447 DEBUG com.jgeekmz.management_app.ManagementAppApplication [main] Application was started not properly!
