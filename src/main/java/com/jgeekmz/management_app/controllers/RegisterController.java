@@ -96,25 +96,27 @@ public class RegisterController {
 
             // Generate random 36-character string token for confirmation link
             user.setConfirmationToken(UUID.randomUUID().toString());
+            String token = user.getConfirmationToken();
 
-            Date todayDate = new Date();
+                    Date todayDate = new Date();
             user.setRegDate(todayDate);
 
             userService.saveUser(user);
 
             // URL for registration
             String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+//
+//            // email notification
+//            SimpleMailMessage registrationEmail = new SimpleMailMessage();
+//            registrationEmail.setTo(user.getEmail());
+//            registrationEmail.setSubject("Registration Confirmation");
+//            registrationEmail.setText("To confirm your e-mail address, please click the link below:\n\n\n" + appUrl + "confirm?token=" + user.getConfirmationToken());
+//            registrationEmail.setFrom("noreply@domain.com");
+//
+//            notificationService.sendEmail(registrationEmail);
 
-            // email notification
-            SimpleMailMessage registrationEmail = new SimpleMailMessage();
-            registrationEmail.setTo(user.getEmail());
-            registrationEmail.setSubject("Registration Confirmation");
-            registrationEmail.setText("To confirm your e-mail address, please click the link below:\n\n\n" + appUrl + "confirm?token=" + user.getConfirmationToken());
-            registrationEmail.setFrom("noreply@domain.com");
-
-            notificationService.sendEmail(registrationEmail);
-
-            JsonNode jsonNode = MailGunConfig.sendSimpleMessage();
+            // MailGun Email Registration sending...
+            JsonNode jsonNode = MailGunConfig.sendSimpleMessage(request,email, token);
             System.out.println(jsonNode.toString());
 
             // redirect to register view with confirmation message
