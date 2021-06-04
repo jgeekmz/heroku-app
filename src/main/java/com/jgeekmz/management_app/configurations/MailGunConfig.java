@@ -17,7 +17,7 @@ public class MailGunConfig {
 
     @Autowired private static User user;
 
-    private static final String YOUR_DOMAIN_NAME = "sandbox1cb2e324d78342c8a242d7aa613b1c87.mailgun.org";
+    private static final String YOUR_DOMAIN_NAME = "sandbox7d1ee779805941c98c4c90e5e68a304e.mailgun.org";
 
 
 
