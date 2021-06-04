@@ -153,7 +153,7 @@ public class RegisterAdminController {
             Role rl = roleRepository.findByName("ROLE_USER");
             List<Role> list = new LinkedList<Role>(Arrays.asList(rl));
             System.out.println("LIST >>> " + list);
-            user.setRoles(list);
+            user.setRoles((Set<Role>) list);
         } catch (Exception e) {
             System.out.println(e);
         }

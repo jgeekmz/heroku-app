@@ -214,11 +214,9 @@
           <!-- alert notification start-->
           <li id="alert_notification_bar" class="dropdown">
               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava">
-                    <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} +'.jpg'}" height="38" width="38">
-                            </span>
-                  <span class="username" th:text="${#authentication.getPrincipal().getUsername()}">User</span>
-                  <b class="caret"></b>
+
+                  <i class="icon-bell-l"></i>
+                  <span class="badge bg-important">7</span>
               </a>
             <ul class="dropdown-menu extended notification">
               <div class="notify-arrow notify-arrow-blue"></div>

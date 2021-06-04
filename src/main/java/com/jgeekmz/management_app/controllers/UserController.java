@@ -110,7 +110,7 @@ public class UserController {
         ArrayList<Role> rl = new ArrayList<>(user.getRoles());
         List<Role> list = new LinkedList<Role>((rl));
         System.out.println("LIST >>> " + list);
-        user.setRoles(list);
+        user.setRoles((Set<Role>) list);
 
 
         userService.save(user);

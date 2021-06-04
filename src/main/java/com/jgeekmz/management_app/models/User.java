@@ -13,9 +13,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @ComponentScan(basePackages = {"com.jgeekmz.ManagementApp.models"})
@@ -66,11 +64,11 @@ public class User {
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
 
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@NotEmpty
     @JoinTable(name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)})
     private Collection<Role> roles;
 
     private Date regDate;
@@ -90,7 +88,7 @@ public class User {
         this.banned = banned;
         this.confirmationToken = confirmationToken;
         this.resetPasswordToken = resetPasswordToken;
-        this.roles = roles;
+        this.roles = (Set<Role>) roles;
         this.regDate = regDate;
     }
 
@@ -167,7 +165,9 @@ public class User {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) { this.enabled = enabled; }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public boolean isBanned() {
         return banned;
@@ -209,7 +209,7 @@ public class User {
         return roles;
     }
 
-    public void setRoles(final Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
