@@ -1,5 +1,7 @@
 package com.jgeekmz.management_app;
 
+import com.jgeekmz.management_app.configurations.SaveUserConfig;
+import com.jgeekmz.management_app.models.User;
 import com.jgeekmz.management_app.repositories.UserRepository;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
@@ -7,6 +9,7 @@ import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +26,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
 @PropertySource("classpath:application.properties")
 public class ManagementAppApplication {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	public ManagementAppApplication(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	//HTTP Port: 8080
 	//@Value("${http.port}")
@@ -48,6 +58,10 @@ public class ManagementAppApplication {
 
 		log.debug("Application was started not properly!");
 	}
+
+
+
+
 
 //	// Additional Connector to enable support for Https and Http
 //	@Bean

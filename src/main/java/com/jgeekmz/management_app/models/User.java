@@ -51,7 +51,7 @@ public class User {
     private String email;
 
     @Column(name = "enabled")
-    @JsonIgnore
+    //@JsonIgnore
     private boolean enabled;
 
     @Column(name = "banned")
@@ -167,9 +167,7 @@ public class User {
         return enabled;
     }
 
-    public void setEnabled(boolean b) {
-        this.enabled = enabled;
-    }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
     public boolean isBanned() {
         return banned;
