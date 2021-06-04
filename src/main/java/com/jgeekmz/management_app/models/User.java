@@ -56,8 +56,6 @@ public class User {
     @JsonIgnore
     private boolean banned;
 
-    private String test;
-
     @Column(name = "confirmation_token")
     private String confirmationToken;
 

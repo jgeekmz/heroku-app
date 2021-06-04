@@ -24,7 +24,7 @@ public class SaveUserConfig implements CommandLineRunner {
     @Autowired private RoleRepository roleRepository;
 
 
-    public void saveAdminUser() {
+    private void saveAdminUser() {
 
         Role rl = new Role();
         rl.setId(1);
@@ -46,9 +46,26 @@ public class SaveUserConfig implements CommandLineRunner {
         userRepository.save(usr1);
     }
 
+    private void createRoles(){
+        Role rl2 = new Role();
+        rl2.setId(2);
+        rl2.setName("ROLE_USER");
+        roleRepository.save(rl2);
+        Role rl3 = new Role();
+        rl3.setId(3);
+        rl3.setName("ROLE_EDITOR");
+        roleRepository.save(rl3);
+        Role rl4 = new Role();
+        rl4.setId(4);
+        rl4.setName("ROLE_CREATOR");
+        roleRepository.save(rl4);
+    }
+
     @Override
     public void run(String... args) throws Exception {
         saveAdminUser();
+        createRoles();
         log.debug("Admin was successfully created and saved into DB!");
+        log.debug("Additional Roles were successfully created in DB! >>> Editor, Creator and User roles");
     }
 }
