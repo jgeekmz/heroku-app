@@ -27,37 +27,27 @@ public class EmployeeService {
         this.userRepo = userRepo;
     }
 
-    /**
-     * Get All Employees
-     */
+    /** Get All Employees */
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
-    /**
-     * Get Employee By Id
-     */
+    /** Get Employee By Id */
     public Optional<Employee> findById(int id) {
         return employeeRepository.findById(id);
     }
 
-    /**
-     * Delete Employee
-     */
+    /** Delete Employee */
     public void delete(int id) {
         employeeRepository.deleteById(id);
     }
 
-    /**
-     * Update Employee
-     */
+    /** Update Employee */
     public void save(Employee employee) {
         employeeRepository.save(employee);
     }
 
-    /**
-     * Get Employee by username
-     */
+    /** Get Employee by username */
     public Employee findByUsername(String un) {
         return employeeRepository.findByUsername(un);
     }
@@ -72,7 +62,6 @@ public class EmployeeService {
         //log.info(String.valueOf(user));
 
            /*if (user == null) {
-               // TODO
                emp.setUsername("No user found!");
                employeeRepository.save(emp);
            } else if (user != null && user.size() == 1) {

@@ -438,7 +438,7 @@
                   <div class="follow-ava">
                       <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} +'.jpg'}" height="30" width="30">
                   </div>
-                  <h6>Administrator</h6>
+                  <h6><span th:text="${admin}"></span></h6>
                 </div>
                 <div class="col-lg-4 col-sm-4 follow-info">
                   <p th:text="${firstName} + ' ' + ${lastName}" >Hello I’m Jenifer Smith, a leading expert in interactive and creative design.</p>

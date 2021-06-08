@@ -432,10 +432,13 @@
         </div>
 
           <!-- Page Content-->
-            <!-- page start-->
+          <!-- page start-->
           <div th:text=${msg}></div>
-
           <span sec:authentication="principal.authorities">ROLE_USER, ROLE_ADMIN</span>
+          <!--Error Messages-->
+          <div style="text-align: left; font-size: 16px; color: #797979; font-weight: bold">
+              <span style="color: #31ff2a;" th:utext="${usernameAlreadyTaken}"></span>
+          </div>
 
           <div class="row">
               <div class="col-lg-12">
@@ -500,7 +503,7 @@
   </section>
   <!-- container section end -->
 
-  <!-- Modal Forms-->
+  <!-- MODAL FORMS -->
   <!--Add Modal New User from admin portal view -->
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <form th:action="@{/users/addNewUser}" method="post">

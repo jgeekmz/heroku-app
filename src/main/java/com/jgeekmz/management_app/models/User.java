@@ -9,10 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.*;
 
 @Entity
@@ -49,7 +46,7 @@ public class User {
     private String email;
 
     @Column(name = "enabled")
-    //@JsonIgnore
+    // @JsonIgnore
     private boolean enabled;
 
     @Column(name = "banned")
@@ -70,6 +67,8 @@ public class User {
     private Collection<Role> roles;
 
     private Date regDate;
+
+    private boolean admin;
 
     @NonNull
     public User() {
@@ -92,8 +91,6 @@ public class User {
 
     @Override
     public String toString() {
-        String output = roles.toString().replace("[", "");
-
         return "User{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
@@ -105,12 +102,38 @@ public class User {
                 ", banned=" + banned +
                 ", confirmationToken='" + confirmationToken + '\'' +
                 ", resetPasswordToken='" + resetPasswordToken + '\'' +
-                ", roles=" + roles.toString().replace("[", "") +
+                ", roles=" + roles +
                 ", regDate=" + regDate +
+                ", admin=" + admin +
                 '}';
     }
 
-    //Getters and Setters
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                enabled == user.enabled &&
+                banned == user.banned &&
+                admin == user.admin &&
+                firstname.equals(user.firstname) &&
+                lastname.equals(user.lastname) &&
+                username.equals(user.username) &&
+                password.equals(user.password) &&
+                email.equals(user.email) &&
+                confirmationToken.equals(user.confirmationToken) &&
+                resetPasswordToken.equals(user.resetPasswordToken) &&
+                roles.equals(user.roles) &&
+                regDate.equals(user.regDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, username, password, email, enabled, banned, confirmationToken, resetPasswordToken, roles, regDate, admin);
+    }
+
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -210,5 +233,9 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public boolean admin() { return admin; }
+
+    public void setAdmin(boolean admin) { admin = admin; }
 
 }

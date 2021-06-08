@@ -17,9 +17,7 @@ public class MailGunConfig {
 
     @Autowired private static User user;
 
-    private static final String YOUR_DOMAIN_NAME = "sandbox7d1ee779805941c98c4c90e5e68a304e.mailgun.org";
-
-
+    private static final String YOUR_DOMAIN_NAME = "sandbox6b3e50d15e064a06906f21fa4896cc6a.mailgun.org";
 
     public static JsonNode sendSimpleMessage(HttpServletRequest request2, String email, String token) throws UnirestException {
 
@@ -29,7 +27,7 @@ public class MailGunConfig {
         //user.setConfirmationToken(UUID.randomUUID().toString());
 
         HttpResponse<com.mashape.unirest.http.JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + YOUR_DOMAIN_NAME + "/messages")
-                .basicAuth("api", API.API_KEY)
+                .basicAuth("api", Sec.SEC)
                 .field("from", "noreply@management-app.com")
                 .field("to", email)
                 .field("subject", "To confirm your e-mail address, please click the link below:\n\n\n" + appUrl + "confirm?token=" + token)

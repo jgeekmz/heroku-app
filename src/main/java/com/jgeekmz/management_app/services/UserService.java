@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service("userService")
 public class UserService {
-    private final UserRepository userRepository;
+    @Autowired  private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
     @Autowired
@@ -26,6 +26,7 @@ public class UserService {
         this.roleRepository = roleRepository;
     }
 
+    User check = null;
 
     //Get All Users
     public List<User> findAll() {
@@ -123,5 +124,13 @@ public class UserService {
         user.setPassword(encodedPassword);
         user.setResetPasswordToken(null);
         userRepository.save(user);
+    }
+
+    public boolean checkAdmin(String username, boolean admin){
+        check = userRepository.findByAdmin(username,admin);
+        if(check != null) {
+            return true;
+        }
+        return false;
     }
 }

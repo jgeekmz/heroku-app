@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,21 +21,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class EmployeeController {
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private EmployeeService employeeService;
-    @Autowired
-    private EmployeeRepository employeeRepository;
-    @Autowired
-    private UserRepository rep;
-
+    @Autowired private EmployeeService employeeService;
+    @Autowired private EmployeeRepository employeeRepository;
+    @Autowired private UserRepository rep;
     private StateService stateService;
     private JobTitleService jobTitleService;
     private EmployeeTypeService employeeTypeService;
@@ -105,9 +107,8 @@ public class EmployeeController {
 
     @PostMapping("/employees/uploadPhoto2")
     public String uploadFile2(@RequestParam("file") MultipartFile file, Principal principal) throws IllegalStateException, IOException {
-        //System.out.println("Principal: " + principal.getName());
-
-        String baseDirectory = "D:\\Downloads\\JGeekMZBootStrap\\src\\main\\resources\\static\\img\\photos\\";
+        log.debug("Picture was successfully uploaded...");
+        String baseDirectory = "C:\\Users\\zlatkov\\IdeaProjects\\management_app_heroku-main\\src\\main\\resources\\static\\img\\photos\\";
         file.transferTo(new File(baseDirectory + principal.getName() + ".jpg"));
         return "redirect:/profile";
     }
@@ -145,4 +146,38 @@ public class EmployeeController {
         return "redirect:/employees";
         //return "employee";
     }
+
+    @GetMapping("/uploadImage")
+    public String homepage() {
+        return "imageUpload";
+    }
+
+    private final String UPLOAD_DIR = "C:\\Users\\zlatkov\\IdeaProjects\\management_app_heroku-main\\src\\main\\resources\\static\\img\\photos\\";
+
+    @PostMapping("/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, Principal principal) {
+
+        // check if file is empty
+        if (file.isEmpty()) {
+            attributes.addFlashAttribute("message", "Please select a file to upload.");
+            return "redirect:/employees";
+        }
+
+        // normalize the file path
+        //String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        // save the file on the local file system
+        try {
+            Path path = Paths.get(UPLOAD_DIR + principal.getName() + ".jpg");
+            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // return success response
+        attributes.addFlashAttribute("message", "You successfully uploaded " + principal.getName() + ".jpg" + '!');
+
+        return "redirect:/employees";
+    }
+
 }

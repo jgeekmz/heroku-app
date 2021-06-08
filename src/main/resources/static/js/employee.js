@@ -1,7 +1,5 @@
 /**
- * 
  */
-
 $('document').ready(function() {
 	
 	$('.table .btn-primary').on('click',function(event){		
@@ -64,7 +62,6 @@ $('document').ready(function() {
 	
 	$('#uploadButton').on('click',function(event){
 		var href = $(this).attr('href');
-		
 		$.post(href, function(data, status){
 			console.log(data);
 		});

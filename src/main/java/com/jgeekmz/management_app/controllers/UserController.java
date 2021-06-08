@@ -21,16 +21,15 @@ import java.util.*;
 
 @Controller
 public class UserController {
+
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private static final String REDIRECT = "redirect:/users";
 
     private final UserService userService;
     private final UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
-    @Autowired
-    private RoleRepository roleRepository;
+    @Autowired private BCryptPasswordEncoder encoder;
+    @Autowired private RoleRepository roleRepository;
 
     @Autowired
     public UserController(UserService userService, UserRepository userRepository) {
@@ -65,71 +64,91 @@ public class UserController {
         RedirectView redirectViewTwo = new RedirectView("/index", true);
         redir.addFlashAttribute("messageUserNotExist", "User is not being registered!");
         //redir.addFlashAttribute("messageUserExist", "User already exist!");
-
         return redirectView;
     }
 
     // Adding new user from user page
     @RequestMapping(value = "users/addNewUser", method = RequestMethod.POST)
-    public String addNewUser(User user) {
-        //save new user to db
-        Date dt = new Date();
-        user.setRegDate(dt);
-        userService.save(user);
-        return REDIRECT;
-    }
+    public String addNewUser(User user, RedirectAttributes redirectAttributes) {
 
-    //Update user
-    @RequestMapping(value = "users/update", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String update(User user) {
-        log.debug("User was activated >>> {}",user);
-        userService.updateUser(user);
-        return REDIRECT;
-    }
+        //Check if we have aleardy such user in datenbank
+        if (user.getUsername() != null) {
+            String findName = user.getUsername();
+            User urName = userService.findByUsername(findName);
 
-    //Delete user
-    @RequestMapping(value = "users/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Integer id) {
-        userService.delete(id);
-        return REDIRECT;
-    }
+            if (urName != null) {
+                String checkName = urName.getUsername();
+                if (urName.getUsername().equals(checkName)) {
+                    RedirectView redirectView = new RedirectView("/users", true);
+                    redirectAttributes.addFlashAttribute("usernameAlreadyTaken", "We found already user with this username in database. Please user another username for this user!");
 
-    //User password update
-    @RequestMapping(value = "users/updateUserPassword", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String updatePassword(User user) {
-        //method for updating the password with modal form admin portal
-        // coke
-        String v1 = "$2a$10$EXTfAbGlQ75pWs7E02gAGuWjMTYliIqpGqvLgMYhbvmaXlCvisb8a";
-        // java
-        String v2 = "$2a$10$qbis0aLF3pBjwGKhOIH9RuzJpK/37zoTCsPzO5pCh9Kl49NqatV0G";
-        String v3 = "java";
+                    log.debug("Found user with username >>> " + urName);
 
-        boolean result = encoder.matches(v3, v2);
-        log.info("Result >>>> " + result);
-        System.out.println(MessageFormat.format("PRINTING USER ROLE: {0} : {1}", user.getUsername(), user.getRoles().toString()));
-        ArrayList<Role> rl = new ArrayList<>(user.getRoles());
-        List<Role> list = new LinkedList<Role>((rl));
-        System.out.println("LIST >>> " + list);
-        user.setRoles((Set<Role>) list);
-
-
-        userService.save(user);
-        return REDIRECT;
-    }
-
-    //Return all not active users
-    @GetMapping("/activations")
-    public String activate(Locale locale, Model model, Boolean enabled, Principal principal, RedirectAttributes redir) {
-        log.info("Logged in user >>>>>" + principal.getName());
-        List<User> user = userService.findByValidFalse(enabled);
-
-        if (user.isEmpty()) {
-            redir.addFlashAttribute("msg", "No users for activation available!");
-            return "redirect:/users";
-        } else {
-            model.addAttribute("users", userService.findByValidFalse(enabled));
+                    return REDIRECT;
+                }
+            } else {
+                //save new user to db
+                Date dt = new Date();
+                user.setRegDate(dt);
+                userService.save(user);
+                log.debug("New user was registered, with username >>> " + user.getUsername());
+            }
         }
-        //model.addAttribute("users",userService.findByValidFalse(enabled));
-        return "activation";
+        return REDIRECT;
     }
-}
+
+        //Update user
+        @RequestMapping(value = "users/update", method = {RequestMethod.PUT, RequestMethod.GET})
+        public String update (User user){
+            log.debug("User was activated >>> {}", user);
+            userService.updateUser(user);
+            return REDIRECT;
+        }
+
+        //Delete user
+        @RequestMapping(value = "users/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
+        public String delete (Integer id){
+            userService.delete(id);
+            return REDIRECT;
+        }
+
+        //User password update
+        @RequestMapping(value = "users/updateUserPassword", method = {RequestMethod.PUT, RequestMethod.GET})
+        public String updatePassword (User user){
+            //method for updating the password with modal form admin portal
+            // coke
+            String v1 = "$2a$10$EXTfAbGlQ75pWs7E02gAGuWjMTYliIqpGqvLgMYhbvmaXlCvisb8a";
+            // java
+            String v2 = "$2a$10$qbis0aLF3pBjwGKhOIH9RuzJpK/37zoTCsPzO5pCh9Kl49NqatV0G";
+            String v3 = "java";
+
+            boolean result = encoder.matches(v3, v2);
+            log.info("Result >>>> " + result);
+            System.out.println(MessageFormat.format("PRINTING USER ROLE: {0} : {1}", user.getUsername(), user.getRoles().toString()));
+            ArrayList<Role> rl = new ArrayList<>(user.getRoles());
+            List<Role> list = new LinkedList<Role>((rl));
+            System.out.println("LIST >>> " + list);
+            user.setRoles((Set<Role>) list);
+
+
+            userService.save(user);
+            return REDIRECT;
+        }
+
+        //Return all not active users
+        @GetMapping("/activations")
+        public String activate (Locale locale, Model model, Boolean enabled, Principal principal, RedirectAttributes
+        redir){
+            log.info("Logged in user >>>>>" + principal.getName());
+            List<User> user = userService.findByValidFalse(enabled);
+
+            if (user.isEmpty()) {
+                redir.addFlashAttribute("msg", "No users for activation available!");
+                return "redirect:/users";
+            } else {
+                model.addAttribute("users", userService.findByValidFalse(enabled));
+            }
+            //model.addAttribute("users",userService.findByValidFalse(enabled));
+            return "activation";
+        }
+    }

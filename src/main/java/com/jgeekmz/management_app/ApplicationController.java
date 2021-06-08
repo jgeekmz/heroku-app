@@ -1,4 +1,4 @@
-package com.jgeekmz.management_app.main.controller;
+package com.jgeekmz.management_app;
 
 import com.jgeekmz.management_app.models.CurrentWeather;
 import com.jgeekmz.management_app.models.Post;
@@ -28,10 +28,7 @@ public class ApplicationController {
     private final PostService postService;
     private final PostRepository postRepo;
     private final UserRepository userRepository;
-
-    //@Autowired
     private final StubWeatherService stubWeatherService;
-    //@Autowired
     private final LiveWeatherService liveWeatherService;
 
     @Autowired
@@ -46,8 +43,10 @@ public class ApplicationController {
         this.liveWeatherService = liveWeatherService;
     }
 
-    //Index page plus count vehicles, users, active users, employees, locations. Find all posts.
-    //Current Weather Forecast
+    /**
+     * Index page count vehicles, users, active users, employees, locations. Find all posts.
+     * Current Weather Forecast
+     */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String goHome(Model model, Long id) {
         CurrentWeather currentWeather = new CurrentWeather("Clear", BigDecimal.ONE, BigDecimal.ZERO, BigDecimal.TEN);
@@ -58,14 +57,17 @@ public class ApplicationController {
         model.addAttribute("posts", postRepo.findAll());
         model.addAttribute("tusers", userRepository.count());
 
-        log.debug("HEREEEEEEEEE");
+        log.debug("Dashboard Page, logged in....");
+
         // count of not active users
         model.addAttribute("tactiveUsers", userRepository.countByID(id));
+
        /* if (true) {
             model.addAttribute("currentWeather", liveWeatherService.getCurrentWeather("Sofia","bg"));
         } else {
             model.addAttribute("currentWeather", stubWeatherService.getCurrentWeather("Detroit","us"));
         }*/
+
         //model.addAttribute("currentWeather", currentWeather);
         return "index";
     }
@@ -73,16 +75,6 @@ public class ApplicationController {
     @RequestMapping("/")
     public String goDashboard() {
         return "/index";
-    }
-
-    //Add new post on the index page
-    @RequestMapping(value = "/index/addNewPost", method = RequestMethod.POST)
-    public String addNewPost(Post post) {
-
-        log.info("New Post was created >>>" + post.toString());
-
-        postService.save(post);
-        return "redirect:/index";
     }
 
     @GetMapping("/logout")
@@ -93,5 +85,13 @@ public class ApplicationController {
     @GetMapping("/blank")
     public String getBlank() {
         return "blank";
+    }
+
+    //Mappings for adding new post
+    @RequestMapping(value = "/index/addNewPost", method = RequestMethod.POST)
+    public String addNewPost(Post post) {
+        log.info("New Post was created {} " + post.toString());
+        postService.save(post);
+        return "redirect:/index";
     }
 }
